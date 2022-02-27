@@ -11,12 +11,11 @@ def index():
 
 
 
-@app.route('/news/<int:news_id>')
-def news(news_id):
-    '''View news page fn that returns the news page and its data'''
+@app.route('/about/<source_id>')
+def about(source_id):
 
-    
-    return render_template('news.html', id = news_id)
+    # articles = get_articles(source_id)
+    return render_template('news.html', id = source_id)
 
 
  
