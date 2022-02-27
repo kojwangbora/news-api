@@ -1,5 +1,3 @@
-from email import message
-from email.mime import text
 from flask import render_template
 from app import app
 
@@ -7,6 +5,18 @@ from app import app
 @app.route('/')
 def index():
     '''View root page fn that returns the index page and its data'''
+    title = 'News-API'
+    return render_template('index.html', title=title)
 
-    text = 'Hello World!'
-    return render_template('index.html', text= text)
+
+
+
+@app.route('/news/<int:news_id>')
+def news(news_id):
+    '''View news page fn that returns the news page and its data'''
+
+    
+    return render_template('news.html', id = news_id)
+
+
+ 
