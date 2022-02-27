@@ -9,6 +9,27 @@
     {% endif %}
 </head>
 <body>
-    
+     <!-- Business sources -->
+     <h3> Business source>s</h3>
+     <ul>
+        {% forbuinsess source %}
+            <li>{{ business_source.title}}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- technology sources -->
+    <h3> Technology </h3>
+     <ul>
+        {% for technology movies %}
+            <li>{{ technology_source.title}}</li>
+        {% endfor %}
+    </ul>
+    <!-- general category source -->
+    <h3>General</h3>
+     <ul>
+        {% for general source %}
+            <li>{{ general_source.title}}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
