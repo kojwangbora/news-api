@@ -16,11 +16,11 @@ def index():
 
 
 
-@app.route('/about/<source_id>')
-def about(source_id):
+# @app.route('/about/<source_id>')
+# def about(source_id):
 
-    # articles = get_articles(source_id)
-    return render_template('news.html', id = source_id)
+#     # articles = get_articles(source_id)
+#     return render_template('news.html', id = source_id)
 
 
  

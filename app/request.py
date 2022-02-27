@@ -7,14 +7,14 @@ Source=source.Source
 
 #Getting api key
 
-api_key = app.config['NEWS_API_KEY']
+apiKey = app.config['NEWS_API_KEY']
 
 #Getting the news base url
-base_url = app.config["MOVIE_API_BASE_URL"]
+base_url = app.config["NEWS_API_BASE_URL"]
 
 def get_sources(category):
     '''function gets json resonse to the url request'''
-    get_sources_url = base_url.format(category,api_key)
+    get_sources_url = base_url.format(category,apiKey)
 
     with urllib.request.urlopen(get_sources_url) as url:
         get_sources_data = url.read()
@@ -23,20 +23,25 @@ def get_sources(category):
         source_results= None
 
         if response['sources']:
-            sources_results_list = response['source']
+            sources_results_list = response['sources']
             sources_results = process_new_sources(sources_results_list)
 
     return sources_results
+    
 def process_new_sources(sources_list):
     sources_results =[]
 
     for sources_item in sources_list:
-        urlToImage= sources_item.get('urlToImage')
+        id= sources_item.get('id')
+        name = sources_item.get('name')
         url=sources_item.get('url')
-        title=sources_item.get('title')
-        content=sources_item.get('content')
-        author=sources_item.get('author')
-        publishedAt=sources_item('publishedAt')
+        description=sources_item.get('description')
+        category=sources_item.get('category')
+        language=sources_item.get('language')
+        country=sources_item.get('country')
+
+        source_object= Source(id,name,url,description,category,language,country)
+        sources_results.append(source_object)
         
     return sources_results
             

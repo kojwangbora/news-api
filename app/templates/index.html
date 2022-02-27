@@ -1,4 +1,4 @@
-{% import 'macros.html' as macro%}
+<!-- {% import 'macros.html' as macro%} -->
 <head>
     <meta charset="utf-8">
     {% if title %}
@@ -9,25 +9,25 @@
 </head>
 <body>
      <!-- Business sources -->
-     <h3> Business source>s</h3>
+     <h3> Business</h3>
      <ul>
-        {% forbuinsess source %}
-            <li>{{ business_source.title}}</li>
+        {% for business_source in business %}
+            <li>{{ business_source.name }}</li>
         {% endfor %}
     </ul>
 
     <!-- technology sources -->
     <h3> Technology </h3>
      <ul>
-        {% for technology movies %}
-            <li>{{ technology_source.title}}</li>
+        {% for technology_source in technology %}
+            <li>{{ technology_source.name }}</li>
         {% endfor %}
     </ul>
     <!-- general category source -->
     <h3>General</h3>
      <ul>
-        {% for general source %}
-            <li>{{ general_source.title}}</li>
+        {% for general_source in general %}
+            <li>{{ general_source.name }}</li>
         {% endfor %}
     </ul>
 </body>
