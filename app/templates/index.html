@@ -1,4 +1,5 @@
-<!-- {% import 'macros.html' as macro%} -->
+{% extends 'base.html'%}
+{% import 'macros.html' as macro%} 
 <head>
     <meta charset="utf-8">
     {% if title %}
@@ -8,27 +9,28 @@
     {% endif %}
 </head>
 <body>
-     <!-- Business sources -->
+    <!-- Content block -->
+    {%block content%}
+
+    <!-- Business sources -->
      <h3> Business</h3>
      <ul>
-        {% for business_source in business %}
-            <li>{{ business_source.name }}</li>
-        {% endfor %}
+        {{ macro.displaySourceList(business)}}
     </ul>
 
     <!-- technology sources -->
     <h3> Technology </h3>
      <ul>
-        {% for technology_source in technology %}
-            <li>{{ technology_source.name }}</li>
-        {% endfor %}
+         
+        {{ macro.displaySourceList(technology)}}
     </ul>
     <!-- general category source -->
     <h3>General</h3>
      <ul>
-        {% for general_source in general %}
-            <li>{{ general_source.name }}</li>
-        {% endfor %}
+        
+        {{ macro.displaySourceList(general)}}
+    
     </ul>
+    {% endblock%}
 </body>
 </html>
