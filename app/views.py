@@ -1,6 +1,6 @@
 from flask import render_template
 from app import app
-from .request import get_sources
+from .request import get_sources,get_source
 
 #Views
 @app.route('/')
@@ -13,7 +13,14 @@ def index():
     title = 'News-API'
     return render_template('index.html', title=title,business=business_sources,technology=technology_sources,general=general_sources)
 
+@app.route('/source/<id>')
+def source(id):
 
+    source= get_source('id')
+    name = f'{source.name}'
+
+
+    return render_template('news.html',name=name,source=source)
 
 
 # @app.route('/about/<source_id>')
