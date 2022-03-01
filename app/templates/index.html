@@ -1,42 +1,49 @@
 {% extends 'base.html'%}
 {% import 'macros.html' as macro%} 
+<!-- styles block -->
 
 {% block styles%}
     {{ super() }}
     <link rel="stylesheet" href="{{url_for('static',filename='index.css')}}">
 {% endblock %}
+
+<!-- content block -->
    
 {% block content %}
 <div class="container">
-    <form>
-        <input type="text" name="source_query" placeholder="Search for news source" class="form-control">
-        <input type="submit"  value="Submit" class="btn btn-default">
-    </form>
-
-</div>
-<div class="container">
-    <!-- Content block -->
-    {%block content%}
-
-    <!-- Business sources -->
-     <h3> Business</h3>
-     <ul>
-        {{ macro.displaySourceList(business)}}
-    </ul>
-
-    <!-- technology sources -->
-    <h3> Technology </h3>
-     <ul>
-         
-        {{ macro.displaySourceList(technology)}}
-    </ul>
-    <!-- general category source -->
-    <h3>General</h3>
-     <ul>
         
-        {{ macro.displaySourceList(general)}}
-    
-    </ul>
+        <hr>
+        <h1 class="text-center">
+            SOURCES
+        </h1>
+    </div>
+
+    <div class="container">
+        <!-- Content block -->
+
+
+        <!-- Business sources -->
+        <h3> Business</h3>
+        <ul>
+            {{ macro.displaySourceList(business)}}
+        </ul>
+
+        <!-- technology sources -->
+        <h3> Technology </h3>
+        <ul>
+            
+            {{ macro.displaySourceList(technology)}}
+        </ul>
+        <!-- general category source -->
+        <h3>General</h3>
+        <ul>
+            
+            {{ macro.displaySourceList(general)}}
+        
+        </ul>
+    </div>
 </div>
+
+
     {% endblock%}
  
