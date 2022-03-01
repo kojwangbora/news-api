@@ -24,16 +24,9 @@ def news(source_id):
 
     # source= source('id')
     # name = f'{source.name}'
-    articles= get_articles(source_id)
+    articles= get_articles('business')
 
 
-    return render_template('news.html',articles=articles)
+    return render_template('news.html',article=articles)
 
-# @app.route('/search/<source_name>')
-# def search(source_name):
-#     '''View fn that displas the search results'''
-#     source_name_list =source_name.split("")
-#     source_name_format = "+".join(source_name_list)
-#     searched_sources = search_source(source_name_format)
-#     id = f'search results for {source_name}'
-#     return render_template('search.html',sources = searched_sources)
+ 

@@ -4,6 +4,7 @@ from .models import articles,source
 # import request
 
 Source=source.Source
+Article=articles.Articles
 
 #Getting api key
 
@@ -11,6 +12,9 @@ apiKey = app.config['NEWS_API_KEY']
 
 #Getting the news base url
 base_url = app.config["NEWS_API_BASE_URL"]
+
+#getting the articles base url
+article_url= app.config["ARTICLE_API_BASE_URL"]
 
 def get_sources(category):
     '''function gets json resonse to the url request'''
@@ -45,24 +49,40 @@ def process_new_sources(sources_list):
         
     return sources_results
 
-def get_articles(article_list):
+def get_articles(source_id):
+    '''function gets json resonse to the url request'''
+    get_articles_url = article_url.format(source_id,apiKey)
+
+    with urllib.request.urlopen(get_articles_url) as url:
+        get_articles_data = url.read()
+        response =json.loads(get_articles_data)
+
+        articles_results= None
+
+        if response['articles']:
+            articles_results_list = response['articles']
+            articles_results = process_articles(articles_results_list)
+
+    return articles_results
+
+def process_articles(article_list):
      
     articles_results =[]
-       
     for articles_details_response in article_list:
-            urlToImage=articles_details_response.get('urlToImage')
-            url = articles_details_response.get('url')
-            title=articles_details_response.get('title')
-            content=articles_details_response.get('content')
-            author=articles_details_response.get('author')
-            datePosted=articles_details_response.get('datePosted')
+        urlToImage=articles_details_response.get('urlToImage')
+        url = articles_details_response.get('url')
+        title=articles_details_response.get('title')
+        content=articles_details_response.get('content')
+        author=articles_details_response.get('author')
+        publishedAt=articles_details_response.get('publishedAt')
 
 
             
             
 
-            articles_object=articles(urlToImage,url,title,content,author,datePosted)
-            articles_results.append(articles_object)
+        articles_object=Article(urlToImage,url,title,content,author,publishedAt)
+            
+        articles_results.append(articles_object)
 
     return articles_results
 
