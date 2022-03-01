@@ -21,13 +21,11 @@ def source(id):
 
 
     return render_template('news.html',name=name,source=source)
-# @app.route('/')
-
-# @app.route('/about/<source_id>')
-# def about(source_id):
-
-#     # articles = get_articles(source_id)
-#     return render_template('news.html', id = source_id)
-
-
- 
+@app.route('/search/<source_name>')
+def search(source_name):
+    '''View fn that displas the search results'''
+    source_name_list =source_name.split("")
+    source_name_format = "+".join(source_name_list)
+    searched_sources = search_source(source_name_format)
+    id = f'search results for {source_name}'
+    return render_template('search.html',sources = searched_sources)

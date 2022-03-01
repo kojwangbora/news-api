@@ -77,5 +77,7 @@ def search_source(source_name):
         if search_source_response['results']:
             search_source_list=search_source_response['results']
             search_source__results =process_new_sources(search_source_list)
+    
+    return search_source__results
 
 
