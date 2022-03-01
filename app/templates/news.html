@@ -1,27 +1,26 @@
 {% extends 'base.html'%}
 <!-- Content block -->
 {% block content %}
+<link rel="stylesheet" href="{{url_for('static',filename='news.css')}}">
+{% endblock %}
+
+{%block title %}
+{%endblock%}
+{% block content %}
 <div class="container">
-    <!-- Poster background -->
-    <div class="row">
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 posterP" style="background:  no-repeat center center">
-        </div>
+    <hr>
+    {%for article in articles}
+    <h1>{{article.title}}</h1>
+    <img src ="{{article.urlToImage}}" alt="">
+    <p>{{article.content}}</p>
+    <div>
+        <a href="{{articles.url}}"><button class= "btn btn-secondary btn-lg" type="button"> More.....</button></a>
 
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 source-details">
-            {% for source in Source %}
-            
-            <h3>{{ Source.id }}</h3>
-
-            <h4 class="name"> {{ Source.name }}</h4>
-            <h4 class="descriptions"> <b> {{ Source.description}}</b> </h4>
-            <h4 class="url"> <b> {{ Source.url}}</b> </h4>
-            <h4 class="category"> <b> {{ Source.category}}</b> </h4>
-            <h4 class="language"> <b> {{ Source.language}}</b> </h4>
-            <h4 class="country"> <b> {{ Source.country}}</b> </h4>
-            {% endfor%}
-
-        </div>
     </div>
-
+    <p class="text-muted">By:{{article.author}}</p>
+    <p>Posted in:{{article.publishedAt}}</p>
+    <br>
+    <hr>
+    % endfor %
 </div>
 {% endblock %}

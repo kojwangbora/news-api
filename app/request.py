@@ -1,9 +1,9 @@
 from app import app
 import urllib.request,json
-from .models import articles, news_source
+from .models import articles,source
 # import request
 
-Source=news_source.Source
+Source=source.Source
 
 #Getting api key
 
@@ -45,39 +45,27 @@ def process_new_sources(sources_list):
         
     return sources_results
 
-def get_source(id):
-    get_source_details_url = base_url.format(id,apiKey)
+def get_articles(article_list):
+     
+    articles_results =[]
+       
+    for articles_details_response in article_list:
+            urlToImage=articles_details_response.get('urlToImage')
+            url = articles_details_response.get('url')
+            title=articles_details_response.get('title')
+            content=articles_details_response.get('content')
+            author=articles_details_response.get('author')
+            datePosted=articles_details_response.get('datePosted')
 
-    with urllib.request.urlopen(get_source_details_url) as url:
-        source_details_data = url.read()
-        source_details_response = json.loads(source_details_data)
 
-        source_object = None
-        if source_details_response:
-            id=source_details_response.get('id')
-            name = source_details_response.get('name')
-            url=source_details_response.get('url')
-            description=source_details_response.get('description')
-            category=source_details_response.get('category')
-            language=source_details_response.get('language')
-            country=source_details_response.get('country')
+            
+            
 
-            source_object=Source(id,name,url,description,category,language,country)
-    
-    return source_object
+            articles_object=articles(urlToImage,url,title,content,author,datePosted)
+            articles_results.append(articles_object)
 
-def search_source(source_name):
-    search_source_url='https://newsapi.org/v2/sources?category={}&apiKey={}'.format(apiKey,source_name)
-    with urllib.request.urlopen(search_source_url) as url:
-        search_source_data = url.read()
-        search_source_response= json.loads(search_source_data)
+    return articles_results
 
-        search_source__results=None
-
-        if search_source_response['results']:
-            search_source_list=search_source_response['results']
-            search_source__results =process_new_sources(search_source_list)
-    
-    return search_source__results
+ 
 
 
