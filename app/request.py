@@ -3,22 +3,22 @@ import urllib.request,json
 from .models import articles,source
 # import request
 
-Source=source.Source
-Article=articles.Articles
+# Source=source.Source
+# Article=articles.Articles
 
-#Getting api key
+# Getting api key
+api_key = None
+base_url = None
+article_url= None
 
-apiKey = app.config['NEWS_API_KEY']
-
-#Getting the news base url
-base_url = app.config["NEWS_API_BASE_URL"]
-
-#getting the articles base url
-article_url= app.config["ARTICLE_API_BASE_URL"]
+def configure_request(app):
+    global api_key,base_url
+    api_key = app.config['MOVIE_API_KEY']
+    base_url = app.config['MOVIE_API_BASE_URL']
 
 def get_sources(category):
     '''function gets json resonse to the url request'''
-    get_sources_url = base_url.format(category,apiKey)
+    get_sources_url = base_url.format(category,api_key)
 
     with urllib.request.urlopen(get_sources_url) as url:
         get_sources_data = url.read()
@@ -50,8 +50,8 @@ def process_new_sources(sources_list):
     return sources_results
 
 def get_articles(source_id):
-    '''function gets json resonse to the url request'''
-    get_articles_url = article_url.format(source_id,apiKey)
+    '''function returns list of articles'''
+    get_articles_url = (article_url.format(source_id,api_key))
 
     with urllib.request.urlopen(get_articles_url) as url:
         get_articles_data = url.read()
