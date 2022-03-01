@@ -7,15 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container ">
         <h1>ARTICLES</h1>
         <hr>
         {%for articles in article%}
         <h1>{{articles.title}}</h1>
-        <img src ="{{articles.urlToImage}}" alt="">
+        <img src ="{{articles.urlToImage}}" alt="" style="height: 50%; width: 50%;">
         <p>{{articles.content}}</p>
         <div>
-            <a href="{{articles.url}}"><button class= "btn btn-secondary btn-lg" type="button"> More.....</button></a>
+            <a href="{{articles.url}}"><button class= "btn btn-secondary bg-secondary btn-lg" type="button"> Read more...</button></a>
     
         </div>
         <p class="text-muted">By:{{articles.author}}</p>
