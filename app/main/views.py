@@ -1,9 +1,9 @@
 from flask import render_template,request,redirect,url_for
-from app import app
+from . import main
 from ..request import get_sources,get_articles
 
 #Views
-@app.route('/')
+@main.route('/')
 def index():
     '''View root page fn that returns the index page and its data'''
     #Getting  business sources
@@ -19,7 +19,7 @@ def index():
     else:
         return render_template('index.html', title=title,business=business_sources,technology=technology_sources,general=general_sources)
 
-@app.route('/news/<source_id>')
+@main.route('/news/<source_id>')
 def news(source_id):
 
     # source= source('id')

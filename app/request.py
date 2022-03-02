@@ -1,24 +1,26 @@
-from app import app
 import urllib.request,json
-from .models import articles,source
-# import request
+from .models import Articles,Source
+ 
+#Getting api key
 
-# Source=source.Source
-# Article=articles.Articles
+apiKey = None
 
-# Getting api key
-api_key = None
+#Getting the news base url
 base_url = None
+
+#getting the articles base url
 article_url= None
 
 def configure_request(app):
-    global api_key,base_url
-    api_key = app.config['MOVIE_API_KEY']
-    base_url = app.config['MOVIE_API_BASE_URL']
+    global apiKey,base_url,article_url
+    apiKey = app.config['NEWS_API_KEY']
+    article_url = app.config['ARTICLE_BASE_URL']
+    base_url = app.config['NEWS_API_BASE_URL']
+    
 
 def get_sources(category):
     '''function gets json resonse to the url request'''
-    get_sources_url = base_url.format(category,api_key)
+    get_sources_url = base_url.format(category,apiKey)
 
     with urllib.request.urlopen(get_sources_url) as url:
         get_sources_data = url.read()
@@ -50,8 +52,8 @@ def process_new_sources(sources_list):
     return sources_results
 
 def get_articles(source_id):
-    '''function returns list of articles'''
-    get_articles_url = (article_url.format(source_id,api_key))
+    '''function gets json resonse to the url request'''
+    get_articles_url = article_url.format(source_id,apiKey)
 
     with urllib.request.urlopen(get_articles_url) as url:
         get_articles_data = url.read()
@@ -80,12 +82,10 @@ def process_articles(article_list):
             
             
 
-        articles_object=Article(urlToImage,url,title,content,author,publishedAt)
+        articles_object=Articles(urlToImage,url,title,content,author,publishedAt)
             
         articles_results.append(articles_object)
 
     return articles_results
 
  
-
-
