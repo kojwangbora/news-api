@@ -41,7 +41,7 @@ command to run your application
 - $ ./start.sh
 
 ## Live Link
-[Live Link]()
+[Live Link](https://news-api-elibora.herokuapp.com/)
 
 ## Known Bugs 
 
